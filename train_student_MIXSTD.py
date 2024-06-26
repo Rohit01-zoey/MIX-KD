@@ -53,7 +53,7 @@ def parse_option():
                                  'resnet8x4', 'resnet32x4', 'wrn_16_1', 'wrn_16_2', 'wrn_40_1', 'wrn_40_2',
                                  'vgg8', 'vgg11', 'vgg13', 'vgg16', 'vgg19', 'ResNet50',
                                  'MobileNetV2', 'ShuffleV1', 'ShuffleV2'])
-    parser.add_argument('--path_t', type=str, default='./save/models/resnet110_vanilla/ckpt_epoch_240.pth', help='teacher model snapshot')
+    parser.add_argument('--path_t', type=str, default='./checkpoints/resnet56/best.pth', help='teacher model snapshot')
     # resnet32x4_vanilla, ResNet50_vanilla, resnet56_vanilla, resnet110_vanilla, vgg13_vanilla, wrn_40_2_vanilla
 
     # KL distillation
@@ -122,10 +122,10 @@ def load_teacher(model_path, n_cls):
     model_t = get_teacher_name(model_path)
     model = model_dict[model_t](num_classes=n_cls)
     if torch.cuda.is_available():
-        model.load_state_dict(torch.load(model_path)['model'])
+        model.load_state_dict(torch.load(model_path)['state_dict'])
         print('==> load done (cuda)')
     else:
-        model.load_state_dict(torch.load(model_path, map_location='cpu')['model'])
+        model.load_state_dict(torch.load(model_path, map_location='cpu')['state'])
         print('==> load done (cpu)')
 
     return model

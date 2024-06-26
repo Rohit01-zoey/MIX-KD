@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=6 python3 train_stu_MIXSTD_txtlog.py
+CUDA_VISIBLE_DEVICES=6 python3 train_stu_MIXSTD_txtlog.py
